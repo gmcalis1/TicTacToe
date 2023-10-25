@@ -1,3 +1,50 @@
 body{
+    font-family: sans-serif;
+    text-align: center;
     background-color: gray;
+}
+
+input{
+    padding: 5px;
+    height: 20px;
+}
+
+button{
+    font-size: x-large;
+}
+
+table{
+    font-size: xxx-large;
+    border: 2px solid black;
+}
+
+th{
+    border: 2px solid black;
+}
+
+td{
+    padding: 40px;
+    border: 2px solid black;
+}
+
+.board{
+    display: flex;
+    justify-content: center;
+}
+
+.player1, .player2{
+    margin-right: 10px;
+}
+
+.playerEntry{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    align-items: center;
+}
+.player1Entry{
+    margin-right: 10px;
+}
+.buttons{
+    padding: 20px;
 }
