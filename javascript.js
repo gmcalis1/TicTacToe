@@ -1,9 +1,11 @@
+
+//module that keeps track of player information
 const players = (function () {
+
+    //keeps track of whos turn it is (0 is X, 1 is for O)
     let playerTurn = 0;
 
-    function getTurn(){
-        return playerTurn;
-    }
+    //function that changes playerTurn to change turns
     function changeTurn(){
         if(playerTurn == 0){
             playerTurn++;
@@ -12,119 +14,137 @@ const players = (function () {
             playerTurn--;
         }
     }
+
+    //activates module functions and variables
+    return {
+        playerTurn,
+        changeTurn
+    }
 })();
 
-
-
-
-
+//module that displays and updates the game board
 const gameBoard = (function () {
-    let square1 = document.getElementById('square1')
-    let square2 = document.getElementById('square2')
-    let square3 = document.getElementById('square3')
-    let square4 = document.getElementById('square4')
-    let square5 = document.getElementById('square5')
-    let square6 = document.getElementById('square6')
-    let square7 = document.getElementById('square7')
-    let square8 = document.getElementById('square8')
-    let square9 = document.getElementById('square9')
 
+    //array that keeps track of the board state
+    const boardArray = ['','','','','','','','','']
+    let board = document.querySelector('table');
+    displayBoard();
+
+    //variables for DOM elements
+    let square1 = document.getElementById('0')
+    let square2 = document.getElementById('1')
+    let square3 = document.getElementById('2')
+    let square4 = document.getElementById('3')
+    let square5 = document.getElementById('4')
+    let square6 = document.getElementById('5')
+    let square7 = document.getElementById('6')
+    let square8 = document.getElementById('7')
+    let square9 = document.getElementById('8')
+
+    //event listeners that listen for clicks on the table squares
     square1.addEventListener('click', (event) =>{
-        changeSquare(square1.innerHTML);
+        changeSquare(0);
     })
     square2.addEventListener('click', (event) =>{
-        changeSquare(square2.innerHTML);
+        changeSquare(1);
     })
     square3.addEventListener('click', (event) =>{
-        changeSquare(square3.innerHTML);
+        changeSquare(2);
     })
     square4.addEventListener('click', (event) =>{
-        changeSquare(square4.innerHTML);
+        changeSquare(3);
     })
     square5.addEventListener('click', (event) =>{
-        changeSquare(square5.innerHTML);
+        changeSquare(4);
     })
     square6.addEventListener('click', (event) =>{
-        changeSquare(square6.innerHTML);
+        changeSquare(5);
     })
     square7.addEventListener('click', (event) =>{
-        changeSquare(square7.innerHTML);
+        changeSquare(6);
     })
     square8.addEventListener('click', (event) =>{
-        changeSquare(square8.innerHTML);
+        changeSquare(7);
     })
     square9.addEventListener('click', (event) =>{
-        changeSquare(square9.innerHTML);
+        changeSquare(8);
     })
 
-
-    const boardArray = ['','','','','','','','','']
-
-    function changeSquare(square){
-        if(players.getTurn() == 0 && square.innerHTML == undefined){
-            square.innerHTML = 'X'
+    //function that changes square on the grid to change to either X or O
+    //depending on the playerTurn variable in the players module
+    function changeSquare(index){
+        console.log('changeSquare activate')
+        if(players.playerTurn == 0 && boardArray[index] == ''){
+            boardArray[index] = 'X'
             players.changeTurn();
+            displayBoard();
             return
         }
-        else if(players.getTurn() == 1 && square.innerHTML == undefined){
-            square .innerHTML = 'O'
+        else if(players.playerTurn == 1 && boardArray[index] == ''){
+            boardArray[index] = 'O'
             players.changeTurn();
+            displayBoard();
             return
         }
     }
 
-
-    /*
-    function addRow(title, author, pages, read){
-        let row = document.createElement("tr");
-        let c0 = document.createElement('td');
-    
-        c5.innerHTML = 'Remove';
-        c5.classList.add('remove');
-        c5.dataset.index = count;
-        
-        row.appendChild(c5);
-        c6 = document.createElement('button');
-        c6.innerHTML = 'Change read status';
-        c6.classList.add('changeRead')
-        c6.dataset.index = count;
-        row.appendChild(c6);
-        tableBody.appendChild(row);
-    }
-    */
+    //displays board according to boardArray
     function displayBoard(){
+        //displays table of boardArray in console for referencing/debugging
         console.table(boardArray);
+
         clearBoard();
+
         for(i = 0; i < boardArray.length; i++){
-            addRow()
+            if(i == 0 ||i == 3 || i == 6){
+                addRow();
+            }
+            let lastRow = board.rows[board.rows.length - 1]
+            lastRow.appendChild(addSquare(i))
         }
-    }
-    /*
-    function displayLibrary(){
-        count = 0;
-        console.table(myLibrary);
-        clearTable();
-        for(i = 0; i < myLibrary.length; i++){
-            addRow(myLibrary[i].title, myLibrary[i].author, myLibrary[i].pages, myLibrary[i].read);
+        function addSquare(index){
+            let square = document.createElement('td');
+            square.setAttribute('id', index)
+            square.innerHTML = boardArray[index]
+            return square
         }
+
+        function addRow(){
+            let row = document.createElement('tr');
+            board.appendChild(row);
+        }
+
     }
-    */
 
     function clearBoard(){
-
-    }
-    /*
-    function clearTable(){
-        console.log('clear table clicked')
-        while(tableBody.firstChild){
-            tableBody.removeChild(tableBody.firstChild);
+        console.log('clearBoard activated')
+        while(board.firstChild){
+            board.removeChild(board.firstChild);
         }
     }
-    */
+   return{
+    square1,
+    board
+   }
   })();
   
-
   const gameFlow = (function () {
+    let startButton = document.getElementById('start')
+    let start = false;
+    startButton.addEventListener('click', (event) =>{
+        start = true;
+    });
+
+    while(start = true){
+
+    }
+
+
+    //get game to keep going after starting game
+    //get game to detect when game ends in win or tie
+    //code player name entry
+
+
 
   })();
 
