@@ -128,6 +128,7 @@ const gameBoard = (function () {
    }
   })();
   
+  //module responsible for starting, ending, and restarting the game
   const gameFlow = (function () {
     let startButton = document.getElementById('start')
     let start = false;
